@@ -1,0 +1,207 @@
+<div class="container">
+<table class="table  table-secondary">
+  <tbody class="table-striped">
+    <H5 class="xxx">DOKTOR</H5>
+    <tr class=" table-dark">
+      <td>Adı</td>
+      <td>Soyadı</td>
+      <td>Adresi</td>
+      <td>Telefon Numarası</td>
+      <td>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doktorEkleModal">
+          Ekle
+        </button>
+
+      </td>
+
+    </tr>
+  </tbody>
+
+  <tbody class="table-striped">
+    <tr *ngFor="let doctor of doctors">
+      <td>{{"Dr. "}}{{ doctor.doctorFirstName }}</td>
+      <td>{{doctor.doctorLastName}}</td>
+      <td>{{doctor.doctorAdress}}</td>
+      <td>{{doctor.doctorPhoheNumber}}</td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="deleteDoctor(doctor)">
+          Sil
+        </button>
+        <button type="button" class="btn btn-warning btn-xs formButton" data-bs-toggle="modal"
+          data-bs-target="#updateDoctorModal" (click)="setSelectedDoctorToUpdate(doctor)" style="margin-right: 10px">
+          Güncelle
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- Modal Ekle -->
+<div class="modal fade" id="doktorEkleModal" tabindex="-1" aria-labelledby="ekleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ekleModal">Ekle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-doctor-add></app-doctor-add>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Modal Güncelle -->
+<div class="modal fade" id="updateDoctorModal" tabindex="-1" aria-labelledby="updateDoctorModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateDoctorTitle">Doktor Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="doctorUpdateForm" *ngIf="doctorUpdateForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="brandId">Id</label>
+              <input type="number" class="form-control" *ngIf="selectedDoctor" id="id" formControlName="id"
+                value="{{selectedDoctor.id}}" readonly>
+            </div>
+            <div class="col-6">
+              <label ></label>
+              <input type="" class="" *ngIf="" id="" formControlName="">
+            </div>
+            <div class="col-6">
+              <label for="doctorFirstName">Ad</label>
+              <input type="text" class="form-control" *ngIf="selectedDoctor" id="doctorFirstName" formControlName="doctorFirstName"
+                value="{{ selectedDoctor.doctorFirstName }}" />
+            </div>
+            <div class="col-6">
+              <label for="doctorLastName">Soyad</label>
+              <input type="text" class="form-control" *ngIf="selectedDoctor" id="doctorLastName" formControlName="doctorLastName"
+                value="{{ selectedDoctor.doctorLastName }}" />
+            </div>
+            <div class="col-6">
+              <label for="doctorAdress">Adres</label>
+              <input type="text" class="form-control" *ngIf="selectedDoctor" id="doctorAdress" formControlName="doctorAdress"
+                value="{{ selectedDoctor.doctorAdress }}" />
+            </div>
+            <div class="col-6">
+              <label for="doctorPhoheNumber">Telefon</label>
+              <input type="text" class="form-control" *ngIf="selectedDoctor" id="doctorPhoheNumber" formControlName="doctorPhoheNumber"
+                value="{{ selectedDoctor.doctorPhoheNumber }}" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button class="btn btn-outline-success" (click)="updateDoctor()" data-bs-dismiss="modal">
+          Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="modal fade" id="doktorGuncelleModal" tabindex="-1" aria-labelledby="doktorGuncelleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="doktorGuncelleModal">Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<app-doctor-update></app-doctor-update>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="modal fade" id="doktorSilModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="silModal">sil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Sil
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+
+<div class="container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" href="#">6</a></li>
+      <li class="page-item"><a class="page-link" href="#">7</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  </div>

@@ -1,0 +1,169 @@
+<div class="container">
+  <table class="table table-secondary">
+    <tbody class="table-striped">
+      <H5 class="xxx">HASTA</H5>
+
+      <tr class="table-dark">
+        <td>Adı</td>
+        <td>Soyadı</td>
+        <td>Sağlık güvencesi</td>
+        <td>Adresi</td>
+        <td>telefon no</td>
+        <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#hastaEkleModal"
+            class="btn btn-success">
+            Ekle
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+    <tbody class="table-striped">
+      <tr *ngFor="let patient of patients">
+        <td>{{patient.patientFirstName }}</td>
+        <td>{{patient.patientLastName}}</td>
+        <td>{{patient.patientInsurance}}</td>
+        <td>{{patient.patientAdress}}</td>
+        <td>{{patient.patientPhoneNumber}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="deletePatient(patient)">
+            Sil
+          </button>
+          <button type="button" class="btn btn-warning btn-xs formButton" data-bs-toggle="modal"
+            data-bs-target="#updatePatientModal" (click)="setSelectedPatientToUpdate(patient)"
+            style="margin-right: 10px">
+            Güncelle
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<!-- Modal Ekle -->
+<div class="modal" id="hastaEkleModal" tabindex="-1" aria-labelledby="ekleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ekleModal">Ekle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-patient-add></app-patient-add>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Güncelle -->
+<div class="modal fade" id="updatePatientModal" tabindex="-1" aria-labelledby="updatePatientModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updatePatientTitle">Hasta Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="patientUpdateForm" *ngIf="patientUpdateForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="brandId">Id</label>
+              <input type="number" class="form-control" *ngIf="selectedPatient" id="id" formControlName="id"
+                value="{{selectedPatient.id}}" readonly>
+            </div>
+            <div class="col-6">
+              <label></label>
+              <input type="" class="" *ngIf="" id="" formControlName="">
+            </div>
+            <div class="col-6">
+              <label for="patientFirstName">Ad</label>
+              <input type="text" class="form-control" *ngIf="selectedPatient" id="patientFirstName"
+                formControlName="patientFirstName" value="{{ selectedPatient.patientFirstName }}" />
+            </div>
+            <div class="col-6">
+              <label for="patientLastName">Soyad</label>
+              <input type="text" class="form-control" *ngIf="selectedPatient" id="patientLastName"
+                formControlName="patientLastName" value="{{ selectedPatient.patientLastName }}" />
+            </div>
+            <div class="col-6">
+              <label for="patientInsurance">Sağlıık güvencesi</label>
+              <input type="text" class="form-control" *ngIf="selectedPatient" id="patientInsurance"
+                formControlName="patientInsurance" value="{{ selectedPatient.patientInsurance }}" />
+            </div>
+            <div class="col-6">
+              <label for="patientAdress">Adres</label>
+              <input type="text" class="form-control" *ngIf="selectedPatient" id="patientAdress"
+                formControlName="patientAdress" value="{{ selectedPatient.patientAdress }}" />
+            </div>
+            <div class="col-6">
+              <label for="patientPhoneNumber">Telefon</label>
+              <input type="text" class="form-control" *ngIf="selectedPatient" id="patientPhoneNumber"
+                formControlName="patientPhoneNumber" value="{{ selectedPatient.patientPhoneNumber }}" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button class="btn btn-outline-success" (click)="updatePatient()" data-bs-dismiss="modal">
+          Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal" id="hastaSilModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="silModal">sil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Sil 1
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" href="#">6</a></li>
+      <li class="page-item"><a class="page-link" href="#">7</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

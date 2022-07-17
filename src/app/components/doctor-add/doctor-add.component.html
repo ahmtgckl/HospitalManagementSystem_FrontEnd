@@ -1,0 +1,53 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Doktor Ekle</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="doctorAddForm">
+          <div class="mb-3">
+            <label for="doctorFirstName">Ad</label>
+            <div class="form-group">
+              <input type="text" id="doctorFirstName" formControlName="doctorFirstName" class="Ad"/>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="doctorLastName">Soyad</label>
+            <div class="form-group">
+              <input type="text" id="doctorLastName" formControlName="doctorLastName" class="Soyad"/>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="doctorAdress">Adres</label>
+            <div class="form-group">
+              <input type="text" id="doctorAdress" formControlName="doctorAdress" class="Adres"/>
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="doctorPhoheNumber">Telefon No</label>
+            <div class="form-group">
+              <input type="text" id="doctorPhoheNumber" formControlName="doctorPhoheNumber" class="Telefon No"/>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+
+      <div class="card-footer">
+
+        <button data-bs-dismiss="modal" (click)="add()" class="btn btn-fill btn-outline-success">
+          Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

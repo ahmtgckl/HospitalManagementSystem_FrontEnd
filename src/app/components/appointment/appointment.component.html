@@ -1,0 +1,173 @@
+<div class="container">
+  <table class="table table-secondary">
+    <tbody class="tabel-striped">
+      <H5 class="xxx">RANDEVU</H5>
+      <tr class=" table-dark">
+        <td>SIRA</td>
+        <td>Hasta Adı</td>
+        <td>Hasta Soyadı</td>
+        <td>Doktor Adı</td>
+        <td>Doktor Soyadı</td>
+        <td>Randevu Tarihi</td>
+        <td>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#randevuEkleModal"
+            class="btn btn-success">
+            Ekle
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr *ngFor="let appointment of appointments">
+        <td>{{appointment.id }}</td>
+        <td>{{appointment.patientFirstName }}</td>
+        <td>{{appointment.patientLastName }}</td>
+        <td>{{appointment.doctorFirstName }}</td>
+        <td>{{appointment.doctorLastName}}</td>
+        <td>{{appointment.appointmentDate}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="deleteAppointment(appointment)">
+            Sil
+          </button>
+          <button type="button" class="btn btn-warning btn-xs formButton" data-bs-toggle="modal"
+            data-bs-target="#appointmentUpdateModal" (click)="setSelectedAppointmentToUpdate(appointment)"
+            style="margin-right: 10px">
+            Güncelle
+          </button>
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">4</a></li>
+      <li class="page-item"><a class="page-link" href="#">5</a></li>
+      <li class="page-item"><a class="page-link" href="#">6</a></li>
+      <li class="page-item"><a class="page-link" href="#">7</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
+
+
+
+
+<!-- Modal Ekle -->
+<div class="modal fade" id="randevuEkleModal" tabindex="-1" aria-labelledby="ekleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ekleModal">Ekle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-appointment-add></app-appointment-add>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Güncelle -->
+<div class="modal fade" id="appointmentUpdateModal" tabindex="-1" aria-labelledby="appointmentUpdateModal"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="appointmentUpdateTitle">Randevu Güncelle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="appointmentUpdateForm" *ngIf="appointmentUpdateForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="brandId">Id</label>
+              <input type="number" class="form-control" *ngIf="selectedAppointment" id="id" formControlName="id"
+                value="{{selectedAppointment.id}}" readonly>
+            </div>
+            <div class="col-6">
+
+              <input type="" class="" *ngIf="" id="" formControlName="">
+            </div>
+            <div class="col-6">
+              <label for="doctorId">Doktor Id'i</label>
+              <input type="number" class="form-control" *ngIf="selectedAppointment" id="doctorId"
+                formControlName="doctorId" value="{{ selectedAppointment.doctorId }}" />
+            </div>
+            <div class="col-6">
+              <label for="patientId">Hasta Id'i</label>
+              <input type="number" class="form-control" *ngIf="selectedAppointment" id="patientId"
+                formControlName="patientId" value="{{ selectedAppointment.patientId }}" />
+            </div>
+
+            <div class="col-6">
+              <label for="appointmentDate">Radevu Tarihi</label>
+              <input type="date" class="form-control" *ngIf="selectedAppointment" id="appointmentDate"
+                formControlName="appointmentDate" value="{{ selectedAppointment.appointmentDate }}" />
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Vazgeç
+        </button>
+        <button class="btn btn-outline-success" (click)="updateAppointment()" data-bs-dismiss="modal">
+          Kaydet
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!--
+<div class="modal fade" id="randevuSilModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="silModal">sil</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      Sil
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıkış</button>
+
+      </div>
+    </div>
+  </div>
+</div> -->

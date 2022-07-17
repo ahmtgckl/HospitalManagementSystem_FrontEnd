@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Randevu Al</h5>
+      </div>
+
+      <div class="card-body">
+        <form [formGroup]="appointmentAddForm">
+
+
+          <div class="mb-3">
+            <label for="doctorId">Doktor Seç</label>
+            <select [(ngModel)]="selectedDoctor" class="form-control" formControlName="doctorId" class="form-select">
+              <option *ngFor="let doctor of doctors" [ngValue]="doctor.id">
+                Dr. {{doctor.doctorFirstName}} {{doctor.doctorLastName}}
+              </option>
+            </select>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="patientId">Hasta Seç</label>
+            <select [(ngModel)]="selectedPatient" class="form-control" formControlName="patientId" class="form-select">
+              <option *ngFor="let patient of patients" [ngValue]="patient.id">
+                {{patient.patientFirstName}} {{patient.patientLastName}}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="appointmentDate">Tarih</label>
+            <div class="form-group">
+              <input type="date" id="appointmentDate" formControlName="appointmentDate" class="form-control"
+                placeholder="Tarih" [min]="minDate" />
+            </div>
+
+
+          </div>
+
+        </form>
+      </div>
+
+
+      <div class="card-footer">
+        <button data-bs-dismiss="modal" (click)="add()" class="btn btn-fill btn-outline-success">
+          Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
